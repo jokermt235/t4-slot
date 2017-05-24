@@ -10,24 +10,24 @@ function Slot(){
     
     this.spinners = [
         {
-            "duration" : 300,
-            "speed" : 40,
+            "duration" : 500,
+            "speed" : 50,
             "symbols" : [],
             "image_slider" : {},
             "interval" : {},
             "current_symbol_index" : 0
         },
         {
-            "duration" : 400,
-            "speed" : 50,
+            "duration" : 600,
+            "speed" : 60,
             "symbols" : [],
             "image_slider" : {},
             "interval" : 0,
             "current_symbol_index" : 0
         },
         {
-            "duration" : 500,
-            "speed" : 60,
+            "duration" : 700,
+            "speed" : 70,
             "symbols" : [],
             "image_slider" : {},
             "interval" : 0,
@@ -159,6 +159,7 @@ Slot.prototype.rotateSpin = function(spin){
     var self = this;
     spin.interval = setInterval(function(){
         spin.speed--;
+        spin.duration--;
         spin.current_symbol_index++;
         if(spin.current_symbol_index == self.symbols.length){
             spin.current_symbol_index = 0;
@@ -167,7 +168,7 @@ Slot.prototype.rotateSpin = function(spin){
         if(spin.image_slider.scrollTop == spin.image_slider.scrollHeight){
             spin.image_slider.scrollTop = 0;
         }
-        if(spin.speed == 0){ 
+        if(spin.duration == 0){ 
             clearInterval(spin.interval);
         }
     },spin.speed);
