@@ -11,27 +11,30 @@ function Slot(){
     this.spinners = [
         {
             "duration" : 500,
-            "speed" : 50,
+            "speed" : 10,
             "symbols" : [],
             "image_slider" : {},
             "interval" : {},
-            "current_symbol_index" : 0
+            "current_symbol_index" : 0,
+            "random_symbols" : []
         },
         {
             "duration" : 600,
-            "speed" : 60,
+            "speed" : 20,
             "symbols" : [],
             "image_slider" : {},
             "interval" : 0,
-            "current_symbol_index" : 0
+            "current_symbol_index" : 0,
+            "random_symbols" : []
         },
         {
             "duration" : 700,
-            "speed" : 70,
+            "speed" : 30,
             "symbols" : [],
             "image_slider" : {},
             "interval" : 0,
-            "current_symbol_index" : 0
+            "current_symbol_index" : 0,
+            "random_symbols" : []
         }   
     ];
 
@@ -157,21 +160,32 @@ Slot.prototype.random = function(min, max) {
 
 Slot.prototype.rotateSpin = function(spin){
     var self = this;
+    var speed = spin.speed;
+    var duration = spin.duration;
     spin.interval = setInterval(function(){
-        spin.speed--;
-        spin.duration--;
+        speed--;
+        duration--;
+        if(speed < 0){
+            speed = spin.speed;
+        }
         spin.current_symbol_index++;
         if(spin.current_symbol_index == self.symbols.length){
             spin.current_symbol_index = 0;
         }
         spin.image_slider.scrollTop += 10;
-        if(spin.image_slider.scrollTop == spin.image_slider.scrollHeight){
+        if(spin.image_slider.scrollTop == spin.image_slider.scrollHeight - 100){
             spin.image_slider.scrollTop = 0;
         }
-        if(spin.duration == 0){ 
-            clearInterval(spin.interval);
+        
+        if(duration == 0){         
+           /*document.getElementById("goal").innerHTML += 
+           
+           "|"+ self.getSymbolNameByPos(spin,spin.image_slider.scrollTop);*/
+           
+           clearInterval(spin.interval);
         }
-    },spin.speed);
+        
+    },speed);
 }
 
 Slot.prototype.showCurrentSpinners = function(){
@@ -190,19 +204,17 @@ Slot.prototype.sliderHtml = function(spiner){
     while(index < spiner.symbols.length){
         if(idx >= spiner.symbols.length) { idx = 0 };
         spiner.image_slider.innerHTML += spiner.symbols[idx].html;
-        spiner.symbols[idx].idx;
-        spiner.symbols[idx].position = pos;
-        pos +=100; 
+        spiner.random_symbols.push(spiner.symbols[idx]);
         idx++;
         index++;
     }
 }
 
 Slot.prototype.getSymbolNameByPos = function(spiner,pos){
-    for(var j=0; j < spiner.symbols.length;j++){
-        if(spiner.symbols[j].position == pos){
-            return spiner.symbols[j].name;
-        }
+    var  idx = pos/100;
+    if(spiner.random_symbols[idx])
+    {
+        return spiner.random_symbols[idx].name;
     }
     return "empty";
 }

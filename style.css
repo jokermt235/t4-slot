@@ -1,3 +1,42 @@
+.win_label{
+    padding:10px;
+    margin:5px;
+    background-color:blue;
+}
+.credits{
+    color:white;
+    font-weight:bolder;
+    padding:10px;
+    margin:5px;
+    background-color: black;
+    display:inline-block;
+}
+
+.bet{
+    margin-left:10px;
+    color:white;
+    font-weight:bolder;
+    padding:10px;
+    margin:5px;
+    background-color: blue;
+    display:inline-block;
+}
+
+.win{
+    color:white;
+    font-weight:bolder;
+    padding:10px;
+    margin:5px;
+    background-color: green;
+    display:inline-block;
+}
+.spin_button.active{
+    color:white;
+    background:orange;
+    font-weight:bolder;
+    padding:10px;
+    display:inline-block;
+}
 .container{
 	width:350px;
 	height:160px;
@@ -7,6 +46,11 @@
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
   	background: black;
+    margin-left:100px;
+}
+.game_pad{
+    margin-top:5px;
+    margin-left:100px;
 }
 .slider-container{
 	float: left;
